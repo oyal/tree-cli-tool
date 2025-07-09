@@ -1,0 +1,47 @@
+# 设置默认行为，如果 Git 认为文件是文本，则自动规范化行结束符
+* text=auto
+
+# 明确指定文本文件使用 LF
+*.js text eol=lf
+*.ts text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.txt text eol=lf
+*.xml text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.less text eol=lf
+
+# 配置文件
+.gitignore text eol=lf
+.gitattributes text eol=lf
+.prettierrc text eol=lf
+.prettierignore text eol=lf
+.npmignore text eol=lf
+tsconfig.json text eol=lf
+package.json text eol=lf
+package-lock.json text eol=lf
+
+# Shell 脚本（如果有的话）
+*.sh text eol=lf
+*.bash text eol=lf
+
+# 二进制文件
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar.gz binary
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+
+# Node.js 特定
+node_modules/** binary

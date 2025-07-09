@@ -1,0 +1,57 @@
+# Source files
+src/
+*.ts
+!*.d.ts
+
+# Development files
+.github/
+coverage/
+node_modules/
+.nyc_output/
+
+# Configuration files
+tsconfig.json
+jest.config.js
+.eslintrc*
+.prettierrc*
+.prettierignore
+.husky/
+
+# Documentation
+docs/
+*.md
+!README.md
+!CHANGELOG.md
+
+# Test files
+**/*.test.js
+**/*.test.ts
+**/*.spec.js
+**/*.spec.ts
+**/__tests__/
+
+# Build artifacts
+*.tsbuildinfo
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env*
+
+# Temporary files
+tmp/
+temp/
+tmp_rovodev_*
+
+# Git
+.git/
+.gitignore

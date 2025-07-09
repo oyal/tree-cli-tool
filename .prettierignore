@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+tmp_rovodev_*
+
+# Package files
+package-lock.json
+yarn.lock
+
+# Generated files
+CHANGELOG.md

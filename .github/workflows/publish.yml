@@ -1,0 +1,121 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version type to bump'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      tag:
+        description: 'Custom version tag (optional)'
+        required: false
+        type: string
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build project
+        run: npm run build
+
+      - name: Bump version (custom)
+        if: ${{ github.event.inputs.tag != '' }}
+        run: |
+          npm version ${{ github.event.inputs.tag }} --no-git-tag-version
+          npm install --package-lock-only
+
+      - name: Bump version (auto)
+        if: ${{ github.event.inputs.tag == '' }}
+        run: |
+          npm version ${{ github.event.inputs.version }} --no-git-tag-version
+          npm install --package-lock-only
+
+      - name: Get new version
+        id: version
+        run: echo "new_version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Commit version bump
+        run: |
+          git add package.json package-lock.json
+          if git diff --staged --quiet; then
+            echo "No version changes to commit"
+          else
+            git commit -m "chore: bump version to v${{ steps.version.outputs.new_version }}"
+          fi
+          git tag v${{ steps.version.outputs.new_version }}
+
+      - name: Push changes
+        run: |
+          if git diff HEAD~1 --quiet; then
+            echo "No changes to push to main branch"
+          else
+            git push origin main
+          fi
+          git push origin v${{ steps.version.outputs.new_version }}
+
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.version.outputs.new_version }}
+          release_name: Release v${{ steps.version.outputs.new_version }}
+          body: |
+            ## Changes in v${{ steps.version.outputs.new_version }}
+
+            Please check the [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for detailed changes.
+
+            ## Installation
+
+            ```bash
+            npm install -g tree-cli-tool
+            ```
+
+            ## Usage
+
+            ```bash
+            tree-cli --help
+            tree-cli quick
+            tree-cli dev
+            ```
+          draft: false
+          prerelease: false

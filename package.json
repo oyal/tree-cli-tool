@@ -1,0 +1,74 @@
+{
+  "name": "tree-cli-tool",
+  "version": "1.0.0",
+  "description": "A powerful command-line tool to display directory tree structure with various configuration options and output formats",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "tree-cli": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oyal/tree-cli-tool.git"
+  },
+  "homepage": "https://github.com/oyal/tree-cli-tool#readme",
+  "bugs": {
+    "url": "https://github.com/oyal/tree-cli-tool/issues"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "dev": "ts-node src/cli.ts",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "npm run format:check",
+    "prepublishOnly": "npm run clean && npm run build && npm run test",
+    "prepack": "npm run build",
+    "postpack": "npm run clean",
+    "publish:check": "npm pack --dry-run && npm run test && npm run format:check"
+  },
+  "keywords": [
+    "tree",
+    "directory",
+    "cli",
+    "file-structure",
+    "command-line",
+    "tree-view",
+    "folder-structure",
+    "file-tree",
+    "directory-tree",
+    "filesystem",
+    "json",
+    "markdown",
+    "typescript",
+    "cross-platform"
+  ],
+  "author": "oyal",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^14.0.0",
+    "glob": "^10.3.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.0.0",
+    "@types/node": "^20.0.0",
+    "jest": "^29.0.0",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
