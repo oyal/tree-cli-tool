@@ -9,6 +9,7 @@ This is a TypeScript CLI tool that generates directory tree structures with vari
 ## Commands
 
 ### Development Commands
+
 - `npm run dev` - Run CLI tool in development mode with ts-node
 - `npm run build` - Compile TypeScript to JavaScript (outputs to dist/)
 - `npm run test` - Run Jest tests with coverage
@@ -17,6 +18,7 @@ This is a TypeScript CLI tool that generates directory tree structures with vari
 - `npm run clean` - Remove dist/ directory
 
 ### CLI Usage (After Build)
+
 - `tree-cli [path]` - Basic tree generation
 - `tree-cli quick [path]` - Quick view excluding common build dirs
 - `tree-cli dev [path]` - Development view excluding more directories
@@ -38,6 +40,7 @@ This is a TypeScript CLI tool that generates directory tree structures with vari
 - **Strategy Pattern**: Different formatters implement common interface for output generation
 
 ### File Structure
+
 - Source code in `src/`
 - Tests in `src/__tests__/`
 - Built output in `dist/` (created by TypeScript compiler)
@@ -50,5 +53,6 @@ Uses Jest with TypeScript support via ts-jest. Test files use `.test.ts` extensi
 ## Publishing
 
 The package uses npm scripts for publishing workflow:
+
 - `prepublishOnly` runs clean, build, and test before publishing
 - Package exports both CLI binary (`dist/cli.js`) and library (`dist/index.js`)
