@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.1] - 2025.07.15
+
+### Added
+- English README.md with comprehensive documentation
+- Chinese documentation preserved in README.zh-CN.md
+- CLAUDE.md file for Claude Code integration guidance
+- Bilingual documentation support with cross-references
+
+### Changed
+- Converted main README from Chinese to English
+- Improved documentation structure and examples
+- Enhanced development and contribution guidelines
+
 ## [1.0.0] - 2025.07.09
 
 ### Added

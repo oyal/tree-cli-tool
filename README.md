@@ -5,132 +5,134 @@
 [![codecov](https://codecov.io/gh/oyal/tree-cli-tool/branch/main/graph/badge.svg)](https://codecov.io/gh/oyal/tree-cli-tool)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-一个功能强大的命令行工具，用于显示目录树状结构，支持多种配置选项和输出格式。
+A powerful command-line tool to display directory tree structure with various configuration options and output formats.
 
-## 安装
+**[中文文档](README.zh-CN.md)**
+
+## Installation
 
 ```bash
 npm install -g tree-cli-tool
 ```
 
-## 基本用法
+## Basic Usage
 
 ```bash
-# 显示当前目录的树状结构
+# Display tree structure of current directory
 tree-cli
 
-# 显示指定目录的树状结构
+# Display tree structure of specified directory
 tree-cli /path/to/directory
 
-# 限制遍历深度
+# Limit traversal depth
 tree-cli -d 3
 
-# 显示文件大小
+# Show file sizes
 tree-cli -s
 
-# 输出为 JSON 格式
+# Output as JSON format
 tree-cli -f json
 
-# 排除特定文件/目录
+# Exclude specific files/directories
 tree-cli -e "node_modules" "*.log" ".git"
 ```
 
-## 命令选项
+## Command Options
 
-### 基本选项
+### Basic Options
 
-- `[path]` - 目标目录路径（默认：当前目录）
-- `-d, --max-depth <number>` - 最大遍历深度，-1 表示无限制（默认：-1）
-- `-f, --format <type>` - 输出格式：text|json|markdown（默认：text）
+- `[path]` - Target directory path (default: current directory)
+- `-d, --max-depth <number>` - Maximum traversal depth, -1 for unlimited (default: -1)
+- `-f, --format <type>` - Output format: text|json|markdown (default: text)
 
-### 过滤选项
+### Filter Options
 
-- `-e, --exclude <patterns...>` - 排除模式（支持 glob 风格）
-- `--include-types <types...>` - 只包含指定文件类型（扩展名）
-- `--exclude-types <types...>` - 排除指定文件类型（扩展名）
-- `-i, --ignore-pattern <regex>` - 正则表达式忽略模式
+- `-e, --exclude <patterns...>` - Exclude patterns (supports glob style)
+- `--include-types <types...>` - Include only specified file types (extensions)
+- `--exclude-types <types...>` - Exclude specified file types (extensions)
+- `-i, --ignore-pattern <regex>` - Regular expression ignore pattern
 
-### 显示选项
+### Display Options
 
-- `-a, --show-hidden` - 显示隐藏文件和目录
-- `-s, --show-size` - 显示文件大小
-- `--show-date` - 显示修改时间
-- `-D, --dirs-only` - 只显示目录
-- `--no-color` - 禁用彩色输出
+- `-a, --show-hidden` - Show hidden files and directories
+- `-s, --show-size` - Show file sizes
+- `--show-date` - Show modification times
+- `-D, --dirs-only` - Show directories only
+- `--no-color` - Disable colored output
 
-### 输出选项
+### Output Options
 
-- `-o, --output <file>` - 输出到文件而不是标准输出
+- `-o, --output <file>` - Output to file instead of stdout
 
-## 预设命令
+## Preset Commands
 
-### quick 命令
+### quick Command
 
-快速查看目录结构，自动排除常见的构建目录：
+Quick directory structure view, automatically excludes common build directories:
 
 ```bash
 tree-cli quick [path] [-d depth]
 ```
 
-自动排除：`node_modules`, `.git`, `dist`, `build`, `.next`, `.nuxt`
+Automatically excludes: `node_modules`, `.git`, `dist`, `build`, `.next`, `.nuxt`
 
-### dev 命令
+### dev Command
 
-开发者友好的视图，排除更多构建和缓存目录：
+Developer-friendly view, excludes more build and cache directories:
 
 ```bash
 tree-cli dev [path] [-d depth]
 ```
 
-自动排除：`node_modules`, `.git`, `dist`, `build`, `.next`, `.nuxt`, `coverage`, `.nyc_output`, `.cache`, `tmp`, `temp`, `*.log`, `.DS_Store`, `Thumbs.db`
+Automatically excludes: `node_modules`, `.git`, `dist`, `build`, `.next`, `.nuxt`, `coverage`, `.nyc_output`, `.cache`, `tmp`, `temp`, `*.log`, `.DS_Store`, `Thumbs.db`
 
-## 使用示例
+## Usage Examples
 
-### 1. 基本目录树
+### 1. Basic Directory Tree
 
 ```bash
 tree-cli
 ```
 
-### 2. 限制深度并显示文件大小
+### 2. Limit Depth and Show File Sizes
 
 ```bash
 tree-cli -d 2 -s
 ```
 
-### 3. 只显示 JavaScript 和 TypeScript 文件
+### 3. Show Only JavaScript and TypeScript Files
 
 ```bash
 tree-cli --include-types js ts jsx tsx
 ```
 
-### 4. 排除特定目录和文件类型
+### 4. Exclude Specific Directories and File Types
 
 ```bash
 tree-cli -e "node_modules" "dist" --exclude-types log tmp
 ```
 
-### 5. 输出为 JSON 格式
+### 5. Output as JSON Format
 
 ```bash
 tree-cli -f json -o tree.json
 ```
 
-### 6. 使用正则表达式排除文件
+### 6. Use Regular Expression to Exclude Files
 
 ```bash
 tree-cli -i "test.*\\.js$"
 ```
 
-### 7. 开发者模式查看项目结构
+### 7. Developer Mode View Project Structure
 
 ```bash
 tree-cli dev -d 3
 ```
 
-## 输出格式
+## Output Formats
 
-### Text 格式（默认）
+### Text Format (Default)
 
 ```
 project/
@@ -144,7 +146,7 @@ project/
 2 directories, 3 files
 ```
 
-### JSON 格式
+### JSON Format
 
 ```json
 {
@@ -162,7 +164,7 @@ project/
 }
 ```
 
-### Markdown 格式
+### Markdown Format
 
 ```markdown
 # Directory Tree: project
@@ -181,7 +183,7 @@ project/
 - **Files**: 3
 ```
 
-## 作为 Node.js 模块使用
+## Use as Node.js Module
 
 ```javascript
 import { generateTree } from 'tree-cli-tool';
@@ -198,70 +200,70 @@ console.log(result.formatted);
 console.log('Stats:', result.stats);
 ```
 
-## 开发
+## Development
 
-### 本地开发
+### Local Development
 
 ```bash
-# 克隆仓库
+# Clone repository
 git clone https://github.com/oyal/tree-cli-tool.git
 cd tree-cli-tool
 
-# 安装依赖
+# Install dependencies
 npm install
 
-# 开发模式运行
+# Run in development mode
 npm run dev
 
-# 构建项目
+# Build project
 npm run build
 
-# 运行测试
+# Run tests
 npm test
 
-# 代码格式化
+# Format code
 npm run format
 
-# 检查代码格式
+# Check code formatting
 npm run format:check
 ```
 
-### 代码质量保证
+### Code Quality Assurance
 
-项目配置了以下代码质量工具：
+The project is configured with the following code quality tools:
 
-- **Prettier**: 代码格式化
-- **GitHub Actions**: 自动化 CI/CD 流程
+- **Prettier**: Code formatting
+- **GitHub Actions**: Automated CI/CD pipeline
 
-**代码质量检查** 在以下时机自动运行：
+**Code quality checks** run automatically at:
 
-1. GitHub Actions CI 流程中
-2. 发布前自动检查（prepublishOnly）
+1. GitHub Actions CI pipeline
+2. Pre-publish checks (prepublishOnly)
 
-### 发布流程
+### Publishing Process
 
-本项目使用 GitHub Actions 自动化发布流程：
+This project uses GitHub Actions for automated publishing:
 
-1. **自动发布** (推荐)：
-   - 进入 GitHub Actions 页面
-   - 选择 "Publish" 工作流
-   - 选择版本类型 (patch/minor/major)
-   - 点击运行
+1. **Automated Publishing** (Recommended):
+   - Go to GitHub Actions page
+   - Select "Publish" workflow
+   - Choose version type (patch/minor/major)
+   - Click run
 
-2. **手动发布**：
+2. **Manual Publishing**:
    ```bash
-   npm version patch  # 或 minor, major
+   npm version patch  # or minor, major
    git push origin main --tags
    ```
 
-### 贡献指南
+### Contributing
 
-1. Fork 本仓库
-2. 创建功能分支 (`git checkout -b feature/amazing-feature`)
-3. 提交更改 (`git commit -m 'Add some amazing feature'`)
-4. 推送到分支 (`git push origin feature/amazing-feature`)
-5. 创建 Pull Request
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Create a Pull Request
 
-## 许可证
+## License
 
 MIT
