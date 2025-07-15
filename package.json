@@ -1,6 +1,6 @@
 {
   "name": "tree-cli-tool",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A powerful command-line tool to display directory tree structure with various configuration options and output formats",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
